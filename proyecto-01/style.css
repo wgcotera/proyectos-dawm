@@ -1,9 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Chicle&family=Comfortaa:wght@300;400;500;600;700&display=swap");
 
+:root {
+  --color-light: #b4cfec;
+  --color-light-10: #eff2f5;
+  --color-light-20: #dbe3f1;
+  --color-dark: black;
+  --shadow: rgb(127, 155, 255);
+}
+
+/* ------------------
+General Style 
+------------------ */
+
 * {
   font-family: "Comfortaa";
   margin: auto;
-  margin-top: 0%;
 }
 
 body {
@@ -15,29 +26,18 @@ body {
 
 section {
   position: relative;
-  margin: 1rem 0;
-  min-width: 100%;
+  display: flex;
   min-height: 100%;
+  min-width: 100%;
+  margin: 1rem;
+  overflow: hidden;
+  height: 100%;
+  border-radius: 30px;
 }
 
 a {
   text-decoration: none;
-}
-
-h1 {
-  color: white;
-  text-align: center;
-  padding-top: 2.5rem;
-  font-weight: 700;
-  text-shadow: blueviolet;
-}
-
-h2 {
-  font-size: 2rem;
-}
-
-h3 {
-  font-size: 3rem;
+  color: black;
 }
 
 a:hover {
@@ -46,23 +46,65 @@ a:hover {
 }
 
 a:focus {
-  color: blueviolet;
+  color: rgb(127, 155, 255);
+  text-shadow: 1rem 1rem 4rem var(--shadow);
 }
 
-.cover {
-  position: relative;
-  display: flex;
+h1 {
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  text-shadow: 1rem 1rem 4rem var(--shadow);
+  padding-top: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 3rem;
+  text-decoration: underline;
+  text-decoration-color: var(--color-light);
+  text-decoration-thickness: 0.5rem;
+}
+
+h4 {
+  text-shadow: 0.05rem 0.05rem 0.1rem var(--shadow);
+}
+
+p {
+  padding: 3rem 0;
+  text-align: justify;
+}
+
+img {
+  width: 100%;
   height: 100%;
-  min-height: 100%;
-  overflow: hidden;
+  object-fit: cover;
+  object-position: left;
+}
+
+.decoration {
+  width: 70%;
+  height: 25%;
+  padding-top: 2rem;
+  letter-spacing: 1.8rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+/* ------------------
+Cover Style
+------------------ */
+
+.cover {
 }
 
 .cover__header {
   width: 35%;
   height: 100%;
-  background-color: black;
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
+  background-color: var(--color-dark);
 }
 
 .cover__header__content {
@@ -70,26 +112,37 @@ a:focus {
   color: white;
   text-align: start;
   right: -55%;
-  top: 65%;
+  top: 30%;
   white-space: nowrap;
   z-index: 1;
+}
+
+.cover h3 {
+  text-decoration: none;
+}
+
+.cover__header__content_h4 {
+  width: fit-content;
+  padding: 0.2rem;
+  margin-left: 0;
+  background-color: var(--color-light);
+  color: black;
 }
 
 .cover__navbar {
   position: relative;
   width: 65%;
   height: 100%;
-  background-color: #dbe3f1;
+  background-color: var(--color-light-20);
   text-align: center;
-  overflow: hidden;
 }
 
 .cover__navbar__content {
   position: relative;
-  width: 100%;
-  padding: 2rem 1rem 2rem 0;
   display: flex;
+  width: 100%;
   justify-content: space-evenly;
+  padding: 2rem 1rem 2rem 0;
 }
 
 .cover__navbar__image {
@@ -97,10 +150,49 @@ a:focus {
   height: 90%;
 }
 
-.cover__navbar__image > img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: left;
+/* 
+------------------
+Me Style 
+------------------ */
+
+.me {
+  background-color: var(--color-light-10);
+}
+
+.me__image {
+  width: 50%;
+  /* Si lo descomento la imagen ocupa todo su lado */
+  margin: 0;
+  padding: 4rem;
+}
+
+.me__image > img {
+  box-shadow: 1rem -1rem 0.5rem;
+}
+
+.me__content {
+  width: 40%;
+  padding: 2rem 3rem 2rem 2rem;
+}
+
+.me__content > h2 {
+  padding-left: 2rem;
+}
+
+.me__content > div {
+  display: flex;
+  text-align: end;
+  justify-content: space-between;
+}
+
+.me__content > div > div {
+  margin: 0;
+  padding-top: 1rem;
+}
+
+.me__content .decoration {
+  padding: 0;
+  letter-spacing: 0.5rem;
+  white-space: nowrap;
+  text-align: end;
 }
