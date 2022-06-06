@@ -21,11 +21,7 @@ General Style
 
 html {
   background: rgb(180, 207, 236);
-  background: radial-gradient(
-    circle,
-    rgba(180, 207, 236, 1) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
+  background: radial-gradient(circle, var(--color-light) 0%, white 100%);
 }
 
 body {
@@ -94,6 +90,13 @@ img {
   object-position: left;
 }
 
+footer {
+  background-color: var(--color-dark);
+  margin-bottom: 3rem;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
 .decoration {
   width: 70%;
   height: 25%;
@@ -108,7 +111,7 @@ Cover Style
 ------------------ */
 
 .cover {
-  margin-top: 5rem;
+  margin-top: 2rem;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
 }
@@ -227,6 +230,7 @@ Work Style
 }
 
 .work__categories {
+  z-index: 1;
   text-align: center;
   margin: 0;
   padding: 2rem 15% 2rem 15%;
@@ -282,8 +286,7 @@ Work Style
   letter-spacing: 0.7rem;
   padding-top: 0;
   padding-right: 0.5rem;
-  color: var(--color-light);
-  z-index: -1;
+  color: var(--color-dark);
 }
 
 /* 
@@ -341,4 +344,42 @@ My Blog Style
 
 .blog__form > form input[type="submit"]:hover {
   background-color: var(--shadow);
+}
+
+/* 
+------------------
+Contact Me Style 
+------------------ */
+
+.footer {
+  background-color: var(--color-dark);
+  text-align: center;
+  color: white;
+  padding: 2rem 1rem 2rem 1rem;
+  width: fit-content;
+}
+
+.footer__header {
+  width: fit-content;
+}
+
+.footer__header > h2 {
+  font-size: 1.5rem;
+  text-align: start;
+}
+
+.footer__data {
+  margin: 4rem auto auto auto;
+  display: flex;
+  gap: 3rem;
+}
+
+.footer__networks {
+  display: flex;
+  margin: 4rem 4rem 2rem 4rem;
+}
+
+.footer__networks img {
+  width: 3rem;
+  padding: 0.05rem;
 }
