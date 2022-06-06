@@ -5,7 +5,7 @@
   --color-light-10: #eff2f5;
   --color-light-20: #dbe3f1;
   --color-dark: black;
-  --shadow: rgb(127, 155, 255);
+  --shadow: #7f9bff;
 }
 
 /* ------------------
@@ -27,12 +27,12 @@ body {
 section {
   position: relative;
   display: flex;
+  height: 100%;
   min-height: 100%;
   min-width: 100%;
   margin: 1rem;
-  overflow: hidden;
-  height: 100%;
   border-radius: 30px;
+  overflow: hidden;
 }
 
 a {
@@ -195,4 +195,68 @@ Me Style
   letter-spacing: 0.5rem;
   white-space: nowrap;
   text-align: end;
+}
+
+/* 
+------------------
+Work Style 
+------------------ */
+
+.work {
+  border: 1px solid var(--color-light);
+  flex-direction: column;
+}
+
+.work__header {
+  width: fit-content;
+  margin: 0 auto 0 auto;
+  padding-top: 2rem;
+  text-align: end;
+}
+
+.work__categories {
+  text-align: center;
+  margin: 0;
+  padding: 2rem 15% 2rem 15%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.work__projects {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+.work__projects__project {
+  display: flex;
+  justify-content: center;
+}
+
+.work__projects__project div {
+  padding: 1rem 0 0.2rem 0;
+}
+
+.work__projects__project img {
+  width: 13rem;
+  height: 10.5rem;
+  padding: 0.5rem;
+  object-fit: cover;
+  object-position: center;
+  box-shadow: 0.5rem -0.5rem 0.5rem var(--color-light),
+    0.5rem -0.5rem 0.7rem black;
+}
+
+.work__projects__project img:hover {
+  width: 14rem;
+  height: 11.5rem;
+  padding: 0;
+  box-shadow: 0.4rem -0.4rem 0.5rem var(--shadow), 0.4rem -0.4rem 0.7rem black;
 }
