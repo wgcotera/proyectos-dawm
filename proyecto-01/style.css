@@ -17,6 +17,7 @@ General Style
 * {
   font-family: "Comfortaa";
   margin: auto;
+  box-sizing: border-box;
 }
 
 html {
@@ -25,10 +26,10 @@ html {
 }
 
 body {
-  min-width: 55rem;
-  min-height: 30rem;
+  min-width: 320px;
   width: 85vw;
   height: 95vh;
+  font-size: 1.2rem;
 }
 
 section {
@@ -271,10 +272,10 @@ Work Style
 }
 
 .work__projects__project img:hover {
-  width: 14rem;
-  height: 11.5rem;
+  width: 13.5rem;
+  height: 11rem;
   padding: 0;
-  box-shadow: 0.4rem -0.4rem 0.5rem var(--shadow), 0.4rem -0.4rem 0.7rem black;
+  box-shadow: 0.4rem -0.4rem 0.5rem var(--shadow);
 }
 
 .work .decoration {
