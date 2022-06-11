@@ -371,8 +371,18 @@ Contact Me Style
   gap: 3rem;
 }
 
+.footer__map {
+  margin: 1rem 0;
+}
+
+.footer__map iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .footer__networks {
-  margin: 4rem 4rem 2rem 4rem;
+  margin: 3rem 3rem 2rem 3rem;
 }
 
 .footer__networks__list {
