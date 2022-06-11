@@ -23,10 +23,10 @@ General Style
 html {
   background: rgb(180, 207, 236);
   background: radial-gradient(circle, var(--color-light) 0%, white 100%);
+  min-width: 320px;
 }
 
 body {
-  min-width: 320px;
   width: 85vw;
   height: 95vh;
   font-size: 1.2rem;
@@ -344,8 +344,7 @@ My Blog Style
   background-color: var(--shadow);
 }
 
-/* 
-------------------
+/* ------------------
 Contact Me Style 
 ------------------ */
 
@@ -373,8 +372,17 @@ Contact Me Style
 }
 
 .footer__networks {
-  display: flex;
   margin: 4rem 4rem 2rem 4rem;
+}
+
+.footer__networks__list {
+  display: flex;
+  text-align: center;
+}
+
+.footer__networks__list ol {
+  margin: auto;
+  padding: 0;
 }
 
 .footer__networks img {
