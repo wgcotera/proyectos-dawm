@@ -15,6 +15,10 @@
     font-size: 1.5rem;
   }
 
+  h1 {
+    text-decoration: underline;
+  }
+
   .decoration {
     z-index: -10;
   }
@@ -48,6 +52,10 @@
 
   .cover__header__content_h4 {
     margin: auto;
+  }
+
+  .cover__header__content h2 {
+    font-size: 1.5rem;
   }
 
   .cover__navbar {
@@ -142,20 +150,17 @@
   }
 
   .footer__networks {
-    margin: 0;
-    width: 100%;
-  }
-
-  .footer__networks__list {
     flex-wrap: wrap;
+    width: 90%;
+    margin: 1rem auto;
   }
 
   .footer__networks img {
     padding: 0.02rem;
   }
 
-  .footer__networks__list ol {
-    width: 30vw;
+  .footer__networks ol {
+    width: 30%;
     margin: 1rem auto;
   }
 }

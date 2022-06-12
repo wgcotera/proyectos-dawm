@@ -289,6 +289,84 @@ Work Style
 }
 
 /* ------------------
+My Interests 
+------------------ */
+
+.interests {
+  border-left: 1px solid var(--color-light);
+  border-right: 1px solid var(--color-light);
+}
+
+.interests__left {
+  position: relative;
+  width: 30%;
+  padding-left: 2rem;
+}
+
+.interests__left .decoration {
+  z-index: -1;
+  text-align: end;
+  color: white;
+}
+
+.interests__left__header {
+  position: relative;
+  text-align: end;
+  top: -12rem;
+}
+
+.interests__right {
+  position: relative;
+  width: 70%;
+}
+
+.interests__right__video {
+  width: fit-content;
+  box-shadow: 0.5rem -0.5rem 0.5rem var(--color-light),
+    0.5rem -0.5rem 0.7rem black;
+}
+
+.interests__right__video video {
+  width: 90%;
+}
+
+.interests__right__table {
+  table-layout: auto;
+  width: 80%;
+  text-align: center;
+  border-collapse: separate;
+}
+
+.interests__right__table td {
+  border: 1px solid black;
+  padding: 1rem;
+}
+
+.lgbt__red {
+  background-color: #ff0018;
+}
+
+.lgbt__orange {
+  background-color: #ffa52c;
+}
+
+.lgbt__yellow {
+  background-color: #ffff41;
+}
+
+.lgbt__green {
+  background-color: #008018;
+}
+
+.lgbt__blue {
+  background-color: #0000f9;
+}
+
+.lgbt__purple {
+  background-color: #86007d;
+}
+
+/* ------------------
 My Blog Style 
 ------------------ */
 
@@ -383,14 +461,11 @@ Contact Me Style
 
 .footer__networks {
   margin: 3rem 3rem 2rem 3rem;
-}
-
-.footer__networks__list {
   display: flex;
   text-align: center;
 }
 
-.footer__networks__list ol {
+.footer__networks ol {
   margin: auto;
   padding: 0;
 }
