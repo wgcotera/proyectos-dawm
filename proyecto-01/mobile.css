@@ -118,6 +118,52 @@
   }
 
   /* ------------------
+  My Interests 
+  ------------------ */
+  .interests {
+    flex-direction: column;
+  }
+
+  .interests .decoration {
+    display: none;
+  }
+
+  .interests__left {
+    width: 100%;
+    padding: 0.2rem;
+    margin: 3rem auto;
+  }
+
+  .interests__left__header {
+    top: 0;
+    text-align: center;
+  }
+
+  .interests__right {
+    margin: 0;
+    width: 100%;
+  }
+
+  .interests__right__video {
+    padding: 0.2rem;
+    width: 100%;
+    margin: 2rem auto;
+  }
+
+  .interests__right__video iframe {
+    width: 100%;
+  }
+
+  .interests__right__table {
+    width: 100%;
+    margin: 0;
+  }
+  .interests__right__table td {
+    border: 1px solid black;
+    padding: 1rem 0.5rem;
+  }
+
+  /* ------------------
   My Blog Style 
   ------------------ */
 
