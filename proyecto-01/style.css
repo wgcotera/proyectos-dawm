@@ -461,9 +461,9 @@ Contact Me Style
 }
 
 .footer__networks {
-  margin: 3rem 3rem 2rem 3rem;
   display: flex;
   text-align: center;
+  padding-bottom: 2rem;
 }
 
 .footer__networks ol {
