@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Chicle&family=Comfortaa:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chicle&family=Comfortaa:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 :root {
   --color-light: #b4cfec;
@@ -15,14 +16,14 @@ General Style
 ------------------ */
 
 * {
-  font-family: "Comfortaa";
+  font-family: "Roboto", sans-serif;
   margin: auto;
   box-sizing: border-box;
 }
 
 html {
-  background: rgb(180, 207, 236);
-  background: radial-gradient(circle, var(--color-light) 0%, white 100%);
+  background: #b4cfec;
+  background: radial-gradient(circle, var(--color-light-10) 0%, white 100%);
   min-width: 320px;
 }
 
@@ -57,19 +58,22 @@ a:focus {
 }
 
 h1 {
+  font-size: 3rem;
   color: white;
   text-align: center;
-  font-weight: 700;
+  font-weight: 300;
   text-shadow: 1rem 1rem 4rem var(--shadow);
   padding-top: 2.5rem;
 }
 
 h2 {
   font-size: 2rem;
+  font-weight: 300;
 }
 
 h3 {
   font-size: 3rem;
+  font-family: "Comfortaa";
   text-decoration: underline;
   text-decoration-color: var(--color-light);
   text-decoration-thickness: 0.5rem;
@@ -304,16 +308,9 @@ My Interests
   padding-left: 2rem;
 }
 
-.interests__left .decoration {
-  z-index: -1;
-  text-align: end;
-  color: white;
-}
-
 .interests__left__header {
   position: relative;
   text-align: end;
-  top: -12rem;
 }
 
 .interests__right {
@@ -335,36 +332,36 @@ My Interests
   table-layout: auto;
   width: 80%;
   text-align: center;
-  border-collapse: separate;
+  border-collapse: collapse;
 }
 
 .interests__right__table td {
-  border: 1px solid black;
+  border: none;
   padding: 1rem;
 }
 
 .lgbt__red {
-  background-color: #ff0018;
+  background-color: #f8dcdc;
 }
 
 .lgbt__orange {
-  background-color: #ffa52c;
+  background-color: #f8ece4;
 }
 
 .lgbt__yellow {
-  background-color: #ffff41;
+  background-color: #f8f4e4;
 }
 
 .lgbt__green {
-  background-color: #008018;
+  background-color: #d8e4dc;
 }
 
 .lgbt__blue {
-  background-color: #0000f9;
+  background-color: #d8dcf4;
 }
 
 .lgbt__purple {
-  background-color: #86007d;
+  background-color: #e8dcec;
 }
 
 /* ------------------
