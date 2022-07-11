@@ -1,5 +1,12 @@
 {
-  "devDependencies": {
-    "tailwindcss": "^3.1.4"
-  }
+  "name": "proyecto-02",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc -p src/ts"
+  },
+  "keywords": [],
+  "author": "wgcotera",
+  "license": "ISC"
 }
