@@ -41,16 +41,91 @@ export const countAnimesByEpisodes = (animeList: AnimeList) => {
     }, {});
 };
 
+export const countAnimesByAiringStatus = (animeList: AnimeList) => {
+  return animeList.data
+    ?.filter((a: Anime) => a.airing !== null)
+    .map((a: Anime) => a.airing)
+    .reduce((acc: any, current: boolean) => {
+      const curr = current ? "Airing" : "Not Airing";
+      acc[curr] = acc[curr] ? acc[curr] + 1 : 1;
+      return acc;
+    }, {});
+};
+
+// List filters
+
+export const filteredDataByAiring = (animeArr: Anime[], value: boolean) => {
+  return animeArr.filter((a: Anime) => a.airing === value);
+};
+
+export const filteredDataByYear = (animeArr: Anime[], value: number) => {
+  return animeArr.filter((a: Anime) => a.year === value);
+};
+
+export const filteredDataByGenre = (animeArr: Anime[], value: string) => {
+  return animeArr.filter((a: Anime) => a.genres.some((g: Genre) => g.name === value));
+};
+
 // HTML elements
 
+export const emptyHTML = (container: string) => {
+  const element = document.getElementById(container);
+  element && (element.innerHTML = "");
+};
+
 export const buildHTML = (query: string, htmlElem: string) => {
-  const container = document.querySelector(query);
+  const container = document.getElementById(query);
   container ? (container.innerHTML += htmlElem) : console.log("Container " + query + " not found");
 };
 
-export const builTableBody = (anime_list: AnimeList) => {
-  const animes = anime_list.data;
-  animes.forEach((a: Anime) => {
+export const buildDropdown = (anime_list: AnimeList, container: string, obj: object) => {
+  const keys = Object.keys(obj);
+  keys.forEach((key: string) => {
+    const option = `<option class="dropdown-item" value="${key}">${key}</option>`;
+    buildHTML(container, option);
+  });
+};
+
+export const addEventListenerToDropdownAiring = (animes: Anime[]) => {
+  const airingDropdown = document.querySelector(".airing-drop");
+  airingDropdown?.addEventListener("click", (e) => {
+    const target = e.target as HTMLOptionElement;
+    const selected = target?.value;
+    console.log(selected);
+    if (selected === "Airing") {
+      emptyHTML("table-body");
+      const filtered = filteredDataByAiring(animes, true);
+      builTableBody(filtered);
+    } else if (selected === "Not Airing") {
+      emptyHTML("table-body");
+      const filtered = filteredDataByAiring(animes, false);
+      builTableBody(filtered);
+    } else {
+      builTableBody(animes);
+    }
+  });
+};
+
+export const addEventListenerToDropdownYear = (animes: Anime[]): void => {
+  const yearDropdown = document.querySelector(".year-drop");
+  yearDropdown?.addEventListener("click", (e) => {
+    const target = e.target as HTMLOptionElement;
+    const selected = target?.value;
+    console.log(selected);
+    if (selected === "All") {
+      emptyHTML("table-body");
+      builTableBody(animes);
+    } else {
+      const filtered = filteredDataByYear(animes, parseInt(selected));
+      emptyHTML("table-body");
+      builTableBody(filtered);
+    }
+  });
+};
+
+export const builTableBody = (animeArr: Anime[]) => {
+  emptyHTML("table-body");
+  Array.from(animeArr).forEach((a: Anime) => {
     const genres = a.genres?.map((g: Genre) => g.name).join(", ");
     const html_anime = `
 <tr>
@@ -63,22 +138,18 @@ export const builTableBody = (anime_list: AnimeList) => {
     <td class="text-center">${genres}</td>
 </tr>
 `;
-    buildHTML("#table-body", html_anime);
+    buildHTML("table-body", html_anime);
   });
 };
 
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-// (async () => {
-//   try {
-//     // let anime_list = await getAnimeListFromAPI(1);
-//     // const genres = countAnimeByGenre(anime_list);
-//     // console.log(anime_list);
-//     // console.log(genres);
-//     // console.log(countAnimesByYear(anime_list));
-//     // console.log(countAnimeByEpisodes(anime_list));
-//     // builTableBody(anime_list);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// })();
+(async () => {
+  try {
+    // const anime_list = await getAnimeListFromAPI(1);
+    // const filtered = filteredDataByAiring(anime_list.data, true);
+    // console.log(filtered);
+  } catch (error) {
+    console.log(error);
+  }
+})();

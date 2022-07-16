@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sleep = exports.builTableBody = exports.buildHTML = exports.countAnimesByEpisodes = exports.countAnimesByYear = exports.countAnimesByGenre = exports.getAnimeListFromAPI = void 0;
+exports.sleep = exports.builTableBody = exports.addEventListenerToDropdownYear = exports.addEventListenerToDropdownAiring = exports.buildDropdown = exports.buildHTML = exports.emptyHTML = exports.filteredDataByGenre = exports.filteredDataByYear = exports.filteredDataByAiring = exports.countAnimesByAiringStatus = exports.countAnimesByEpisodes = exports.countAnimesByYear = exports.countAnimesByGenre = exports.getAnimeListFromAPI = void 0;
 const base_url = "https://api.jikan.moe/v4/anime";
 // Get information from Anime API
 const getAnimeListFromAPI = async (page) => {
@@ -34,15 +34,90 @@ const countAnimesByEpisodes = (animeList) => {
     }, {});
 };
 exports.countAnimesByEpisodes = countAnimesByEpisodes;
+const countAnimesByAiringStatus = (animeList) => {
+    var _a;
+    return (_a = animeList.data) === null || _a === void 0 ? void 0 : _a.filter((a) => a.airing !== null).map((a) => a.airing).reduce((acc, current) => {
+        const curr = current ? "Airing" : "Not Airing";
+        acc[curr] = acc[curr] ? acc[curr] + 1 : 1;
+        return acc;
+    }, {});
+};
+exports.countAnimesByAiringStatus = countAnimesByAiringStatus;
+// List filters
+const filteredDataByAiring = (animeArr, value) => {
+    return animeArr.filter((a) => a.airing === value);
+};
+exports.filteredDataByAiring = filteredDataByAiring;
+const filteredDataByYear = (animeArr, value) => {
+    return animeArr.filter((a) => a.year === value);
+};
+exports.filteredDataByYear = filteredDataByYear;
+const filteredDataByGenre = (animeArr, value) => {
+    return animeArr.filter((a) => a.genres.some((g) => g.name === value));
+};
+exports.filteredDataByGenre = filteredDataByGenre;
 // HTML elements
+const emptyHTML = (container) => {
+    const element = document.getElementById(container);
+    element && (element.innerHTML = "");
+};
+exports.emptyHTML = emptyHTML;
 const buildHTML = (query, htmlElem) => {
-    const container = document.querySelector(query);
+    const container = document.getElementById(query);
     container ? (container.innerHTML += htmlElem) : console.log("Container " + query + " not found");
 };
 exports.buildHTML = buildHTML;
-const builTableBody = (anime_list) => {
-    const animes = anime_list.data;
-    animes.forEach((a) => {
+const buildDropdown = (anime_list, container, obj) => {
+    const keys = Object.keys(obj);
+    keys.forEach((key) => {
+        const option = `<option class="dropdown-item" value="${key}">${key}</option>`;
+        (0, exports.buildHTML)(container, option);
+    });
+};
+exports.buildDropdown = buildDropdown;
+const addEventListenerToDropdownAiring = (animes) => {
+    const airingDropdown = document.querySelector(".airing-drop");
+    airingDropdown === null || airingDropdown === void 0 ? void 0 : airingDropdown.addEventListener("click", (e) => {
+        const target = e.target;
+        const selected = target === null || target === void 0 ? void 0 : target.value;
+        console.log(selected);
+        if (selected === "Airing") {
+            (0, exports.emptyHTML)("table-body");
+            const filtered = (0, exports.filteredDataByAiring)(animes, true);
+            (0, exports.builTableBody)(filtered);
+        }
+        else if (selected === "Not Airing") {
+            (0, exports.emptyHTML)("table-body");
+            const filtered = (0, exports.filteredDataByAiring)(animes, false);
+            (0, exports.builTableBody)(filtered);
+        }
+        else {
+            (0, exports.builTableBody)(animes);
+        }
+    });
+};
+exports.addEventListenerToDropdownAiring = addEventListenerToDropdownAiring;
+const addEventListenerToDropdownYear = (animes) => {
+    const yearDropdown = document.querySelector(".year-drop");
+    yearDropdown === null || yearDropdown === void 0 ? void 0 : yearDropdown.addEventListener("click", (e) => {
+        const target = e.target;
+        const selected = target === null || target === void 0 ? void 0 : target.value;
+        console.log(selected);
+        if (selected === "All") {
+            (0, exports.emptyHTML)("table-body");
+            (0, exports.builTableBody)(animes);
+        }
+        else {
+            const filtered = (0, exports.filteredDataByYear)(animes, parseInt(selected));
+            (0, exports.emptyHTML)("table-body");
+            (0, exports.builTableBody)(filtered);
+        }
+    });
+};
+exports.addEventListenerToDropdownYear = addEventListenerToDropdownYear;
+const builTableBody = (animeArr) => {
+    (0, exports.emptyHTML)("table-body");
+    Array.from(animeArr).forEach((a) => {
         var _a;
         const genres = (_a = a.genres) === null || _a === void 0 ? void 0 : _a.map((g) => g.name).join(", ");
         const html_anime = `
@@ -56,22 +131,19 @@ const builTableBody = (anime_list) => {
     <td class="text-center">${genres}</td>
 </tr>
 `;
-        (0, exports.buildHTML)("#table-body", html_anime);
+        (0, exports.buildHTML)("table-body", html_anime);
     });
 };
 exports.builTableBody = builTableBody;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 exports.sleep = sleep;
-// (async () => {
-//   try {
-//     // let anime_list = await getAnimeListFromAPI(1);
-//     // const genres = countAnimeByGenre(anime_list);
-//     // console.log(anime_list);
-//     // console.log(genres);
-//     // console.log(countAnimesByYear(anime_list));
-//     // console.log(countAnimeByEpisodes(anime_list));
-//     // builTableBody(anime_list);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// })();
+(async () => {
+    try {
+        // const anime_list = await getAnimeListFromAPI(1);
+        // const filtered = filteredDataByAiring(anime_list.data, true);
+        // console.log(filtered);
+    }
+    catch (error) {
+        console.log(error);
+    }
+})();

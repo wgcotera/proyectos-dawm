@@ -42,7 +42,7 @@
         <div class="sidebar-wrapper">
           <div class="logo">
             <a href="javascript:void(0)" class="simple-text logo-mini"> WM </a>
-            <a href="javascript:void(0)" class="simple-text logo-normal"> W-ANIME </a>
+            <a href="javascript:void(0)" class="simple-text logo-normal"> OTAKU </a>
           </div>
           <ul class="nav">
             <li class="active">
@@ -83,7 +83,7 @@
         <div class="content">
           <div class="row">
             <div class="col-12">
-              <div class="card card-chart">
+              <div class="card card-chart" style="height: 400px">
                 <div class="card-header">
                   <div class="row">
                     <div class="col-sm-6 text-left">
@@ -93,9 +93,9 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <div class="chart-area">
+                  <div class="chart-area h-100">
                     <!-- horizontal bar chart -->
-                    <canvas id="line"></canvas>
+                    <canvas id="line" class="h-100"></canvas>
                     <!-- horizontal bar chart -->
                   </div>
                 </div>
@@ -104,7 +104,7 @@
           </div>
           <div class="row">
             <div class="col-lg-6">
-              <div class="card card-chart">
+              <div class="card card-chart" style="height: 500px">
                 <div class="card-header">
                   <h5 class="card-category">Total Animes</h5>
                   <h3 class="card-title" id="total-animes">
@@ -113,9 +113,9 @@
                   </h3>
                 </div>
                 <div class="card-body">
-                  <div class="chart-area">
+                  <div class="chart-area h-100">
                     <!-- second chart -->
-                    <canvas id="bar"></canvas>
+                    <canvas id="bar" class="h-100"></canvas>
                     <!-- second chart -->
                   </div>
                 </div>
@@ -123,15 +123,15 @@
             </div>
 
             <div class="col-lg-6">
-              <div class="card card-chart">
+              <div class="card card-chart" style="height: 500px">
                 <div class="card-header">
                   <h5 class="card-category">Total Animes</h5>
                   <h3 class="card-title">Per Number of Episodes</h3>
                 </div>
                 <div class="card-body">
-                  <div class="chart-area">
+                  <div class="chart-area h-100">
                     <!-- fourth chart -->
-                    <canvas id="pie"></canvas>
+                    <canvas id="pie" class="h-100"></canvas>
                     <!-- fourth chart -->
                   </div>
                 </div>
@@ -145,17 +145,77 @@
                   <h4 class="card-title">Anime List</h4>
                 </div>
                 <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table tablesorter" id="">
+                  <div class="table" style="height: 500px; overflow-y: scroll">
+                    <table class="table tablesorter table-striped h-25">
                       <thead class="text-primary">
                         <tr>
-                          <th>Title</th>
-                          <th class="text-center">Episodes</th>
-                          <th class="text-center">Airing</th>
-                          <th class="text-center">Score</th>
-                          <th class="text-center">Rank</th>
-                          <th class="text-center">Year</th>
-                          <th class="text-center">Genres</th>
+                          <th col-index="1">Title</th>
+                          <th class="text-center" col-index="2">Episodes</th>
+                          <th class="text-center d-flex" col-index="3">
+                            <div class="dropdown airing">
+                              <button
+                                class="btn btn-secondary dropdown-toggle"
+                                type="button"
+                                id="dropdownMenuButton"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                              >
+                                Airing
+                              </button>
+                              <div
+                                class="dropdown-menu airing-drop"
+                                aria-labelledby="dropdownMenuButton"
+                                id="airing-drop"
+                              >
+                                <option class="dropdown-item" value="All">All</option>
+                              </div>
+                            </div>
+                          </th>
+                          <th class="text-center" col-index="4">Score</th>
+                          <th class="text-center" col-index="5">Rank</th>
+                          <th class="text-center" col-index="6">
+                            <div class="dropdown">
+                              <button
+                                class="btn btn-secondary dropdown-toggle"
+                                type="button"
+                                id="dropdownMenuButton"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                              >
+                                Year
+                              </button>
+                              <div
+                                class="dropdown-menu year-drop"
+                                aria-labelledby="dropdownMenuButton"
+                                id="year-drop"
+                              >
+                                <option class="dropdown-item" value="All">All</option>
+                              </div>
+                            </div>
+                          </th>
+                          <th class="text-center" col-index="7">
+                            <div class="dropdown">
+                              <button
+                                class="btn btn-secondary dropdown-toggle"
+                                type="button"
+                                id="dropdownMenuButton"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                              >
+                                Genres
+                              </button>
+                              <div
+                                class="dropdown-menu"
+                                aria-labelledby="dropdownMenuButton"
+                                id="genres-drop"
+                              >
+                                <option class="dropdown-item" value="genres">All</option>
+                              </div>
+                            </div>
+                          </th>
                         </tr>
                       </thead>
                       <tbody id="table-body"></tbody>
