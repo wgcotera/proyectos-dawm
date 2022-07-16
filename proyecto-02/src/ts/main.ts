@@ -1,5 +1,4 @@
 import { AnimeList, Anime, Genre } from "./interfaces/Anime";
-
 const base_url = "https://api.jikan.moe/v4/anime";
 
 // Get information from Anime API
@@ -9,17 +8,35 @@ export const getAnimeListFromAPI = async (page: number): Promise<AnimeList> => {
   return await response.json();
 };
 
-// const getAnimeListFromAPI = async () => {
-//   const res = await fetch("https://kitsu.io/api/edge/anime");
-//   return await res.json();
-// };
-
 // Information for graphs
 
-const countAnimeByGenre = (animeList: AnimeList) => {
-  const data = animeList.data;
-  const genres = data?.map((a: Anime) => a.genres);
-  console.log(genres);
+export const countAnimeByGenre = (animeList: AnimeList) => {
+  return animeList.data
+    ?.flatMap((a: Anime) => a.genres)
+    .map((g: Genre) => g.name)
+    .reduce((acc: any, curr: string) => {
+      acc[curr] = acc[curr] ? acc[curr] + 1 : 1;
+      return acc;
+    }, {});
+};
+
+export const countAnimesByYear = (animeList: AnimeList) => {
+  return animeList.data
+    ?.filter((a: Anime) => a.year !== null)
+    .map((a: Anime) => a.year)
+    .reduce((acc: any, curr: number) => {
+      acc[curr] = acc[curr] ? acc[curr] + 1 : 1;
+      return acc;
+    }, {});
+};
+
+export const countAnimeByEpisodes = (animeList: AnimeList) => {
+  return animeList.data
+    ?.map((a: Anime) => a.episodes)
+    ?.reduce((acc: any, curr: number) => {
+      acc[curr] = acc[curr] ? acc[curr] + 1 : 1;
+      return acc;
+    }, {});
 };
 
 // HTML elements
@@ -36,23 +53,29 @@ export const builTableBody = (anime_list: AnimeList) => {
     const html_anime = `
 <tr>
     <td>${a.title}</td>
-    <td>${a.episodes}</td>
-    <td>${a.airing}</td>
-    <td>${a.duration}</td>
-    <td>${a.score}</td>
-    <td>${a.rank}</td>
-    <td>${genres}</td>
+    <td class="text-center">${a.episodes}</td>
+    <td class="text-center">${a.airing}</td>
+    <td class="text-center">${a.score}</td>
+    <td class="text-center">${a.rank}</td>
+    <td class="text-center">${a.year}</td>
+    <td class="text-center">${genres}</td>
 </tr>
 `;
     buildHTML("#table-body", html_anime);
   });
 };
 
+export let anime_list: AnimeList;
+
 (async () => {
   try {
-    const anime_list = await getAnimeListFromAPI(2);
-    const genres = countAnimeByGenre(anime_list);
-    console.log(genres);
+    anime_list = await getAnimeListFromAPI(1);
+    // const genres = countAnimeByGenre(anime_list);
+    // console.log(anime_list);
+    // console.log(genres);
+    // console.log(countAnimesByYear(anime_list));
+    // console.log(countAnimeByEpisodes(anime_list));
+    builTableBody(anime_list);
   } catch (error) {
     console.log(error);
   }

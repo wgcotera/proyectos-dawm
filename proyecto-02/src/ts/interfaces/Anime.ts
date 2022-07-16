@@ -53,6 +53,7 @@ interface Anime {
   readonly trailer_url: string;
   readonly type: string;
   readonly url: string;
+  readonly year: number;
 }
 
 interface Aired {
