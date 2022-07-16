@@ -67,6 +67,8 @@ export const builTableBody = (anime_list: AnimeList) => {
   });
 };
 
+export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 // (async () => {
 //   try {
 //     // let anime_list = await getAnimeListFromAPI(1);

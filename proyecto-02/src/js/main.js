@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.builTableBody = exports.buildHTML = exports.countAnimesByEpisodes = exports.countAnimesByYear = exports.countAnimesByGenre = exports.getAnimeListFromAPI = void 0;
+exports.sleep = exports.builTableBody = exports.buildHTML = exports.countAnimesByEpisodes = exports.countAnimesByYear = exports.countAnimesByGenre = exports.getAnimeListFromAPI = void 0;
 const base_url = "https://api.jikan.moe/v4/anime";
 // Get information from Anime API
 const getAnimeListFromAPI = async (page) => {
@@ -60,6 +60,8 @@ const builTableBody = (anime_list) => {
     });
 };
 exports.builTableBody = builTableBody;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+exports.sleep = sleep;
 // (async () => {
 //   try {
 //     // let anime_list = await getAnimeListFromAPI(1);
