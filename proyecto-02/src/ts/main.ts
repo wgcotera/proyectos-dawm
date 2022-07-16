@@ -30,11 +30,13 @@ export const countAnimesByYear = (animeList: AnimeList) => {
     }, {});
 };
 
-export const countAnimeByEpisodes = (animeList: AnimeList) => {
+export const countAnimesByEpisodes = (animeList: AnimeList) => {
   return animeList.data
-    ?.map((a: Anime) => a.episodes)
-    ?.reduce((acc: any, curr: number) => {
-      acc[curr] = acc[curr] ? acc[curr] + 1 : 1;
+    ?.filter((a: Anime) => a.episodes !== null)
+    .map((a: Anime) => a.episodes)
+    .reduce((acc: any, curr: number) => {
+      const current = curr === 1 ? curr + " Episode" : curr + " Episodes";
+      acc[current] = acc[current] ? acc[current] + 1 : 1;
       return acc;
     }, {});
 };

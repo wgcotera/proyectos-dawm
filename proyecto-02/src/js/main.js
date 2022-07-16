@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.builTableBody = exports.buildHTML = exports.countAnimeByEpisodes = exports.countAnimesByYear = exports.countAnimesByGenre = exports.getAnimeListFromAPI = void 0;
+exports.builTableBody = exports.buildHTML = exports.countAnimesByEpisodes = exports.countAnimesByYear = exports.countAnimesByGenre = exports.getAnimeListFromAPI = void 0;
 const base_url = "https://api.jikan.moe/v4/anime";
 // Get information from Anime API
 const getAnimeListFromAPI = async (page) => {
@@ -25,14 +25,15 @@ const countAnimesByYear = (animeList) => {
     }, {});
 };
 exports.countAnimesByYear = countAnimesByYear;
-const countAnimeByEpisodes = (animeList) => {
-    var _a, _b;
-    return (_b = (_a = animeList.data) === null || _a === void 0 ? void 0 : _a.map((a) => a.episodes)) === null || _b === void 0 ? void 0 : _b.reduce((acc, curr) => {
-        acc[curr] = acc[curr] ? acc[curr] + 1 : 1;
+const countAnimesByEpisodes = (animeList) => {
+    var _a;
+    return (_a = animeList.data) === null || _a === void 0 ? void 0 : _a.filter((a) => a.episodes !== null).map((a) => a.episodes).reduce((acc, curr) => {
+        const current = curr === 1 ? curr + " Episode" : curr + " Episodes";
+        acc[current] = acc[current] ? acc[current] + 1 : 1;
         return acc;
     }, {});
 };
-exports.countAnimeByEpisodes = countAnimeByEpisodes;
+exports.countAnimesByEpisodes = countAnimesByEpisodes;
 // HTML elements
 const buildHTML = (query, htmlElem) => {
     const container = document.querySelector(query);
