@@ -3,14 +3,14 @@ const base_url = "https://api.jikan.moe/v4/anime";
 
 // Get information from Anime API
 
-const getAnimeListFromAPI = async (page: number): Promise<AnimeList> => {
+export const getAnimeListFromAPI = async (page: number): Promise<AnimeList> => {
   const response: Response = await fetch(`${base_url}?page=${page}`);
   return await response.json();
 };
 
 // Information for graphs
 
-const countAnimeByGenre = (animeList: AnimeList) => {
+export const countAnimesByGenre = (animeList: AnimeList) => {
   return animeList.data
     ?.flatMap((a: Anime) => a.genres)
     .map((g: Genre) => g.name)
@@ -20,7 +20,7 @@ const countAnimeByGenre = (animeList: AnimeList) => {
     }, {});
 };
 
-const countAnimesByYear = (animeList: AnimeList) => {
+export const countAnimesByYear = (animeList: AnimeList) => {
   return animeList.data
     ?.filter((a: Anime) => a.year !== null)
     .map((a: Anime) => a.year)
@@ -30,7 +30,7 @@ const countAnimesByYear = (animeList: AnimeList) => {
     }, {});
 };
 
-const countAnimeByEpisodes = (animeList: AnimeList) => {
+export const countAnimeByEpisodes = (animeList: AnimeList) => {
   return animeList.data
     ?.map((a: Anime) => a.episodes)
     ?.reduce((acc: any, curr: number) => {
@@ -41,12 +41,12 @@ const countAnimeByEpisodes = (animeList: AnimeList) => {
 
 // HTML elements
 
-const buildHTML = (query: string, htmlElem: string) => {
+export const buildHTML = (query: string, htmlElem: string) => {
   const container = document.querySelector(query);
   container ? (container.innerHTML += htmlElem) : console.log("Container " + query + " not found");
 };
 
-const builTableBody = (anime_list: AnimeList) => {
+export const builTableBody = (anime_list: AnimeList) => {
   const animes = anime_list.data;
   animes.forEach((a: Anime) => {
     const genres = a.genres?.map((g: Genre) => g.name).join(", ");
@@ -65,16 +65,16 @@ const builTableBody = (anime_list: AnimeList) => {
   });
 };
 
-(async () => {
-  try {
-    // let anime_list = await getAnimeListFromAPI(1);
-    // const genres = countAnimeByGenre(anime_list);
-    // console.log(anime_list);
-    // console.log(genres);
-    // console.log(countAnimesByYear(anime_list));
-    // console.log(countAnimeByEpisodes(anime_list));
-    // builTableBody(anime_list);
-  } catch (error) {
-    console.log(error);
-  }
-})();
+// (async () => {
+//   try {
+//     // let anime_list = await getAnimeListFromAPI(1);
+//     // const genres = countAnimeByGenre(anime_list);
+//     // console.log(anime_list);
+//     // console.log(genres);
+//     // console.log(countAnimesByYear(anime_list));
+//     // console.log(countAnimeByEpisodes(anime_list));
+//     // builTableBody(anime_list);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// })();
