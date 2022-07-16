@@ -1,7 +1,7 @@
 (async () => {
   try {
     const anime_list = await getAnimeListFromAPI(1);
-    for (i = 2; i <= 4; i++) {
+    for (i = 2; i <= 3; i++) {
       sleep(2000);
       const anime_list_2 = await getAnimeListFromAPI(2);
       // push new anime list data to the first list
@@ -125,11 +125,11 @@
     const pieChart = new Chart(document.getElementById("pie"), {
       type: "pie",
       data: {
-        labels: Object.keys(airing),
+        labels: Object.keys(episodes),
         datasets: [
           {
             label: "Animes",
-            data: Object.values(airing),
+            data: Object.values(episodes),
             backgroundColor: [
               "rgba(255, 26, 104, 0.2)",
               "rgba(54, 162, 235, 0.2)",
@@ -184,15 +184,12 @@
     });
 
     builTableBody(table_list);
+
     buildDropdown(table_list, "airing-drop", airing);
     buildDropdown(table_list, "year-drop", years);
     buildDropdown(anime_list, "genres-drop", genres);
 
-    addEventListenerToDropdownAiring(table_list);
-    addEventListenerToDropdownYear(table_list);
-    addEventListenerToDropdownGenre(table_list);
-
-    // emptyHTML("table-body");
+    addAllListeners(table_list);
   } catch (error) {
     console.log(error);
   }

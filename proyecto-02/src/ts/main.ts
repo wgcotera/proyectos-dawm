@@ -112,7 +112,6 @@ export const addEventListenerToDropdownAiring = (animes: Anime[]) => {
   airingDropdown?.addEventListener("click", (e) => {
     const target = e.target as HTMLOptionElement;
     const selected = target?.value;
-    console.log(selected);
     emptyHTML("table-body");
     if (selected === "Airing") {
       const filtered = filteredDataByAiring(animes, true);
@@ -131,7 +130,6 @@ export const addEventListenerToDropdownYear = (animes: Anime[]): void => {
   yearDropdown?.addEventListener("click", (e) => {
     const target = e.target as HTMLOptionElement;
     const selected = target?.value;
-    console.log(selected);
     emptyHTML("table-body");
     if (selected === "All") {
       builTableBody(animes);
@@ -147,26 +145,21 @@ export const addEventListenerToDropdownGenre = (animes: Anime[]) => {
   genreDropdown?.addEventListener("click", (e) => {
     const target = e.target as HTMLOptionElement;
     const selected = target?.value;
-    console.log(selected);
     emptyHTML("table-body");
     if (selected === "All") {
       builTableBody(animes);
     } else {
       const filtered = filteredDataByGenre(animes, selected);
-      console.log(filtered);
       builTableBody(filtered);
     }
   });
 };
 
-export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+export const addAllListeners = (animes: Anime[]) => {
+  let modAnimes = animes;
+  addEventListenerToDropdownAiring(modAnimes);
+  addEventListenerToDropdownYear(modAnimes);
+  addEventListenerToDropdownGenre(modAnimes);
+};
 
-(async () => {
-  try {
-    // const anime_list = await getAnimeListFromAPI(1);
-    // const filtered = filteredDataByAiring(anime_list.data, true);
-    // console.log(filtered);
-  } catch (error) {
-    console.log(error);
-  }
-})();
+export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sleep = exports.addEventListenerToDropdownGenre = exports.addEventListenerToDropdownYear = exports.addEventListenerToDropdownAiring = exports.builTableBody = exports.buildDropdown = exports.buildHTML = exports.emptyHTML = exports.filteredDataByGenre = exports.filteredDataByYear = exports.filteredDataByAiring = exports.countAnimesByAiringStatus = exports.countAnimesByEpisodes = exports.countAnimesByYear = exports.countAnimesByGenre = exports.getAnimeListFromAPI = void 0;
+exports.sleep = exports.addAllListeners = exports.addEventListenerToDropdownGenre = exports.addEventListenerToDropdownYear = exports.addEventListenerToDropdownAiring = exports.builTableBody = exports.buildDropdown = exports.buildHTML = exports.emptyHTML = exports.filteredDataByGenre = exports.filteredDataByYear = exports.filteredDataByAiring = exports.countAnimesByAiringStatus = exports.countAnimesByEpisodes = exports.countAnimesByYear = exports.countAnimesByGenre = exports.getAnimeListFromAPI = void 0;
 const base_url = "https://api.jikan.moe/v4/anime";
 // Get information from Anime API
 const getAnimeListFromAPI = async (page) => {
@@ -101,7 +101,6 @@ const addEventListenerToDropdownAiring = (animes) => {
     airingDropdown === null || airingDropdown === void 0 ? void 0 : airingDropdown.addEventListener("click", (e) => {
         const target = e.target;
         const selected = target === null || target === void 0 ? void 0 : target.value;
-        console.log(selected);
         (0, exports.emptyHTML)("table-body");
         if (selected === "Airing") {
             const filtered = (0, exports.filteredDataByAiring)(animes, true);
@@ -122,7 +121,6 @@ const addEventListenerToDropdownYear = (animes) => {
     yearDropdown === null || yearDropdown === void 0 ? void 0 : yearDropdown.addEventListener("click", (e) => {
         const target = e.target;
         const selected = target === null || target === void 0 ? void 0 : target.value;
-        console.log(selected);
         (0, exports.emptyHTML)("table-body");
         if (selected === "All") {
             (0, exports.builTableBody)(animes);
@@ -139,19 +137,24 @@ const addEventListenerToDropdownGenre = (animes) => {
     genreDropdown === null || genreDropdown === void 0 ? void 0 : genreDropdown.addEventListener("click", (e) => {
         const target = e.target;
         const selected = target === null || target === void 0 ? void 0 : target.value;
-        console.log(selected);
         (0, exports.emptyHTML)("table-body");
         if (selected === "All") {
             (0, exports.builTableBody)(animes);
         }
         else {
             const filtered = (0, exports.filteredDataByGenre)(animes, selected);
-            console.log(filtered);
             (0, exports.builTableBody)(filtered);
         }
     });
 };
 exports.addEventListenerToDropdownGenre = addEventListenerToDropdownGenre;
+const addAllListeners = (animes) => {
+    let modAnimes = animes;
+    (0, exports.addEventListenerToDropdownAiring)(modAnimes);
+    (0, exports.addEventListenerToDropdownYear)(modAnimes);
+    (0, exports.addEventListenerToDropdownGenre)(modAnimes);
+};
+exports.addAllListeners = addAllListeners;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 exports.sleep = sleep;
 (async () => {
