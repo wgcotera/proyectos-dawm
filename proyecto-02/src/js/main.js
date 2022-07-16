@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sleep = exports.builTableBody = exports.addEventListenerToDropdownYear = exports.addEventListenerToDropdownAiring = exports.buildDropdown = exports.buildHTML = exports.emptyHTML = exports.filteredDataByGenre = exports.filteredDataByYear = exports.filteredDataByAiring = exports.countAnimesByAiringStatus = exports.countAnimesByEpisodes = exports.countAnimesByYear = exports.countAnimesByGenre = exports.getAnimeListFromAPI = void 0;
+exports.sleep = exports.addEventListenerToDropdownGenre = exports.addEventListenerToDropdownYear = exports.addEventListenerToDropdownAiring = exports.builTableBody = exports.buildDropdown = exports.buildHTML = exports.emptyHTML = exports.filteredDataByGenre = exports.filteredDataByYear = exports.filteredDataByAiring = exports.countAnimesByAiringStatus = exports.countAnimesByEpisodes = exports.countAnimesByYear = exports.countAnimesByGenre = exports.getAnimeListFromAPI = void 0;
 const base_url = "https://api.jikan.moe/v4/anime";
 // Get information from Anime API
 const getAnimeListFromAPI = async (page) => {
@@ -43,7 +43,7 @@ const countAnimesByAiringStatus = (animeList) => {
     }, {});
 };
 exports.countAnimesByAiringStatus = countAnimesByAiringStatus;
-// List filters
+// filtered anime list
 const filteredDataByAiring = (animeArr, value) => {
     return animeArr.filter((a) => a.airing === value);
 };
@@ -75,46 +75,6 @@ const buildDropdown = (anime_list, container, obj) => {
     });
 };
 exports.buildDropdown = buildDropdown;
-const addEventListenerToDropdownAiring = (animes) => {
-    const airingDropdown = document.querySelector(".airing-drop");
-    airingDropdown === null || airingDropdown === void 0 ? void 0 : airingDropdown.addEventListener("click", (e) => {
-        const target = e.target;
-        const selected = target === null || target === void 0 ? void 0 : target.value;
-        console.log(selected);
-        if (selected === "Airing") {
-            (0, exports.emptyHTML)("table-body");
-            const filtered = (0, exports.filteredDataByAiring)(animes, true);
-            (0, exports.builTableBody)(filtered);
-        }
-        else if (selected === "Not Airing") {
-            (0, exports.emptyHTML)("table-body");
-            const filtered = (0, exports.filteredDataByAiring)(animes, false);
-            (0, exports.builTableBody)(filtered);
-        }
-        else {
-            (0, exports.builTableBody)(animes);
-        }
-    });
-};
-exports.addEventListenerToDropdownAiring = addEventListenerToDropdownAiring;
-const addEventListenerToDropdownYear = (animes) => {
-    const yearDropdown = document.querySelector(".year-drop");
-    yearDropdown === null || yearDropdown === void 0 ? void 0 : yearDropdown.addEventListener("click", (e) => {
-        const target = e.target;
-        const selected = target === null || target === void 0 ? void 0 : target.value;
-        console.log(selected);
-        if (selected === "All") {
-            (0, exports.emptyHTML)("table-body");
-            (0, exports.builTableBody)(animes);
-        }
-        else {
-            const filtered = (0, exports.filteredDataByYear)(animes, parseInt(selected));
-            (0, exports.emptyHTML)("table-body");
-            (0, exports.builTableBody)(filtered);
-        }
-    });
-};
-exports.addEventListenerToDropdownYear = addEventListenerToDropdownYear;
 const builTableBody = (animeArr) => {
     (0, exports.emptyHTML)("table-body");
     Array.from(animeArr).forEach((a) => {
@@ -135,6 +95,63 @@ const builTableBody = (animeArr) => {
     });
 };
 exports.builTableBody = builTableBody;
+// Event listeners
+const addEventListenerToDropdownAiring = (animes) => {
+    const airingDropdown = document.querySelector(".airing-drop");
+    airingDropdown === null || airingDropdown === void 0 ? void 0 : airingDropdown.addEventListener("click", (e) => {
+        const target = e.target;
+        const selected = target === null || target === void 0 ? void 0 : target.value;
+        console.log(selected);
+        (0, exports.emptyHTML)("table-body");
+        if (selected === "Airing") {
+            const filtered = (0, exports.filteredDataByAiring)(animes, true);
+            (0, exports.builTableBody)(filtered);
+        }
+        else if (selected === "Not Airing") {
+            const filtered = (0, exports.filteredDataByAiring)(animes, false);
+            (0, exports.builTableBody)(filtered);
+        }
+        else {
+            (0, exports.builTableBody)(animes);
+        }
+    });
+};
+exports.addEventListenerToDropdownAiring = addEventListenerToDropdownAiring;
+const addEventListenerToDropdownYear = (animes) => {
+    const yearDropdown = document.querySelector(".year-drop");
+    yearDropdown === null || yearDropdown === void 0 ? void 0 : yearDropdown.addEventListener("click", (e) => {
+        const target = e.target;
+        const selected = target === null || target === void 0 ? void 0 : target.value;
+        console.log(selected);
+        (0, exports.emptyHTML)("table-body");
+        if (selected === "All") {
+            (0, exports.builTableBody)(animes);
+        }
+        else {
+            const filtered = (0, exports.filteredDataByYear)(animes, parseInt(selected));
+            (0, exports.builTableBody)(filtered);
+        }
+    });
+};
+exports.addEventListenerToDropdownYear = addEventListenerToDropdownYear;
+const addEventListenerToDropdownGenre = (animes) => {
+    const genreDropdown = document.querySelector(".genres-drop");
+    genreDropdown === null || genreDropdown === void 0 ? void 0 : genreDropdown.addEventListener("click", (e) => {
+        const target = e.target;
+        const selected = target === null || target === void 0 ? void 0 : target.value;
+        console.log(selected);
+        (0, exports.emptyHTML)("table-body");
+        if (selected === "All") {
+            (0, exports.builTableBody)(animes);
+        }
+        else {
+            const filtered = (0, exports.filteredDataByGenre)(animes, selected);
+            console.log(filtered);
+            (0, exports.builTableBody)(filtered);
+        }
+    });
+};
+exports.addEventListenerToDropdownGenre = addEventListenerToDropdownGenre;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 exports.sleep = sleep;
 (async () => {

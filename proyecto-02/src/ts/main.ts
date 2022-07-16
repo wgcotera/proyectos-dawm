@@ -52,7 +52,7 @@ export const countAnimesByAiringStatus = (animeList: AnimeList) => {
     }, {});
 };
 
-// List filters
+// filtered anime list
 
 export const filteredDataByAiring = (animeArr: Anime[], value: boolean) => {
   return animeArr.filter((a: Anime) => a.airing === value);
@@ -86,43 +86,6 @@ export const buildDropdown = (anime_list: AnimeList, container: string, obj: obj
   });
 };
 
-export const addEventListenerToDropdownAiring = (animes: Anime[]) => {
-  const airingDropdown = document.querySelector(".airing-drop");
-  airingDropdown?.addEventListener("click", (e) => {
-    const target = e.target as HTMLOptionElement;
-    const selected = target?.value;
-    console.log(selected);
-    if (selected === "Airing") {
-      emptyHTML("table-body");
-      const filtered = filteredDataByAiring(animes, true);
-      builTableBody(filtered);
-    } else if (selected === "Not Airing") {
-      emptyHTML("table-body");
-      const filtered = filteredDataByAiring(animes, false);
-      builTableBody(filtered);
-    } else {
-      builTableBody(animes);
-    }
-  });
-};
-
-export const addEventListenerToDropdownYear = (animes: Anime[]): void => {
-  const yearDropdown = document.querySelector(".year-drop");
-  yearDropdown?.addEventListener("click", (e) => {
-    const target = e.target as HTMLOptionElement;
-    const selected = target?.value;
-    console.log(selected);
-    if (selected === "All") {
-      emptyHTML("table-body");
-      builTableBody(animes);
-    } else {
-      const filtered = filteredDataByYear(animes, parseInt(selected));
-      emptyHTML("table-body");
-      builTableBody(filtered);
-    }
-  });
-};
-
 export const builTableBody = (animeArr: Anime[]) => {
   emptyHTML("table-body");
   Array.from(animeArr).forEach((a: Anime) => {
@@ -139,6 +102,60 @@ export const builTableBody = (animeArr: Anime[]) => {
 </tr>
 `;
     buildHTML("table-body", html_anime);
+  });
+};
+
+// Event listeners
+
+export const addEventListenerToDropdownAiring = (animes: Anime[]) => {
+  const airingDropdown = document.querySelector(".airing-drop");
+  airingDropdown?.addEventListener("click", (e) => {
+    const target = e.target as HTMLOptionElement;
+    const selected = target?.value;
+    console.log(selected);
+    emptyHTML("table-body");
+    if (selected === "Airing") {
+      const filtered = filteredDataByAiring(animes, true);
+      builTableBody(filtered);
+    } else if (selected === "Not Airing") {
+      const filtered = filteredDataByAiring(animes, false);
+      builTableBody(filtered);
+    } else {
+      builTableBody(animes);
+    }
+  });
+};
+
+export const addEventListenerToDropdownYear = (animes: Anime[]): void => {
+  const yearDropdown = document.querySelector(".year-drop");
+  yearDropdown?.addEventListener("click", (e) => {
+    const target = e.target as HTMLOptionElement;
+    const selected = target?.value;
+    console.log(selected);
+    emptyHTML("table-body");
+    if (selected === "All") {
+      builTableBody(animes);
+    } else {
+      const filtered = filteredDataByYear(animes, parseInt(selected));
+      builTableBody(filtered);
+    }
+  });
+};
+
+export const addEventListenerToDropdownGenre = (animes: Anime[]) => {
+  const genreDropdown = document.querySelector(".genres-drop");
+  genreDropdown?.addEventListener("click", (e) => {
+    const target = e.target as HTMLOptionElement;
+    const selected = target?.value;
+    console.log(selected);
+    emptyHTML("table-body");
+    if (selected === "All") {
+      builTableBody(animes);
+    } else {
+      const filtered = filteredDataByGenre(animes, selected);
+      console.log(filtered);
+      builTableBody(filtered);
+    }
   });
 };
 

@@ -1,14 +1,13 @@
 (async () => {
   try {
     const anime_list = await getAnimeListFromAPI(1);
-
-    sleep(3000);
-
-    const anime_list_2 = await getAnimeListFromAPI(2);
+    for (i = 2; i <= 4; i++) {
+      sleep(2000);
+      const anime_list_2 = await getAnimeListFromAPI(2);
+      // push new anime list data to the first list
+      anime_list.data.push(...anime_list_2.data);
+    }
     const table_list = anime_list.data;
-
-    // push new anime list data to the first list
-    anime_list.data.push(...anime_list_2.data);
 
     const years = countAnimesByYear(anime_list);
     const genres = countAnimesByGenre(anime_list);
@@ -187,11 +186,12 @@
     builTableBody(table_list);
     buildDropdown(table_list, "airing-drop", airing);
     buildDropdown(table_list, "year-drop", years);
+    buildDropdown(anime_list, "genres-drop", genres);
 
     addEventListenerToDropdownAiring(table_list);
     addEventListenerToDropdownYear(table_list);
+    addEventListenerToDropdownGenre(table_list);
 
-    // buildDropdown(anime_list_copy, "genres-drop", genres);
     // emptyHTML("table-body");
   } catch (error) {
     console.log(error);
