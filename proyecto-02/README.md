@@ -1,6 +1,6 @@
 # Proyecto 2
 
-## Diseñar e implementar una página web interactiva y adaptable que utilice las tecnologías disponibles del lado del cliente.
+Diseñar e implementar una página web interactiva y adaptable que utilice las tecnologías disponibles del lado del cliente.
 
 ### Link a la pagina web resultante:
 
@@ -8,11 +8,11 @@
 
 ### Graficas con de datos cargados directamente de la API.
 
-![DASHBOARD](images/dasboard-1.png)
+![DASHBOARD](images/dashboard-1.png)
 
 ### Tabla con filtros de busqueda
 
-![DASHBOARD](images/dasboard-2.png)
+![DASHBOARD](images/dashboard-2.png)
 
 ## Lineamientos
 
