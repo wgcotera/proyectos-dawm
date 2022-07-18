@@ -157,13 +157,3 @@ const addAllListeners = (animes) => {
 exports.addAllListeners = addAllListeners;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 exports.sleep = sleep;
-(async () => {
-    try {
-        // const anime_list = await getAnimeListFromAPI(1);
-        // const filtered = filteredDataByAiring(anime_list.data, true);
-        // console.log(filtered);
-    }
-    catch (error) {
-        console.log(error);
-    }
-})();
